@@ -25,7 +25,6 @@ const { type, amount } = expense
  */
 
 const isPalindrome = word => {
-    debugger;
     let neword = '';
     const wordArray = word.toString().replace(/ /g,'').split("");
     for (let i = wordArray.length-1; i >= 0; i-- ) {
@@ -39,4 +38,33 @@ const isPalindrome = word => {
     return false;
 }
 
+/**
+ * Qn3: Write a function (say fruitPresent('fruit-name') )to find out if a given input is present in the array below using
+ */
+const fruitPresent = fruitName => {
+    let fruits = [
+        'Apple', 'Apricot', 'Avocado', 'banana', 'Blackberry', 'Blueberry', 'Boysenberry', 'Crab apples',
+        'Currant', 'Cherry', 'Cherimoya', 'Chico fruit', 'Coconut', 'Cranberry', 'Custard apple', 'Date', 'dragonfruit', 'durian',
+        'Elderberry', 'Feijoa', 'Fig', 'Goji berry', 'Gooseberry', 'grape', 'Grapefruit', 'Guava', 'Honeyberry', 'Huckleberry',
+        'Jabuticaba', 'Jackfruit', 'Jambul', 'jujube', 'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat',
+        'Longan', 'Lychee', 'Mango', 'Mangosteen', 'Marionberry', 'Melon', 'Cantaloupe', 'Honeydew', 'Watermelon',
+        'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive', 'Orange', 'Blood orange', 'Clementine', 'Mandarine',
+        'Tangerine', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Plantain', 'Plum', 'Prune', 'Pineapple', 'Pluot',
+        'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Rambutan', 'Redcurrant', 'Salal berry', 'Salak', 'Salmonberry',
+        'Satsuma', 'Soursop', 'Star fruit', 'Strawberry', 'Tamarillo', 'Tamarind', 'Ugli fruit', 'Yuzu'
+    ];
+
+    const filteredFruits = fruits.filter(fruit => {
+        return fruit.toString().toLowerCase() === fruitName.toString().toLowerCase();
+    });
+    // debugger;
+    if (filteredFruits.length > 0) {
+        return true
+    } 
+    return false;
+
+}
+
 console.warn("ppp", isPalindrome(""));
+console.warn("ppp", fruitPresent("apple"));
+console.warn("ppp", fruitPresent("apple2"));
