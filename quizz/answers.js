@@ -106,6 +106,20 @@ const CostOfProduct = productName => {
        return product.qty * product.price; 
     }
 }
+
+/**
+ * Will
+ */
+const team = {
+    members:['Superman','Batman','Wonder Woman'],
+    teamName: 'Justice league',
+    teamSummary: function(){
+    return this.members.map(function(member) {
+    return `${member} is on team ${this.teamName}`;
+    });
+    }
+   };
+   team.teamSummary()
  
 
 
