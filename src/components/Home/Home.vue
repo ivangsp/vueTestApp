@@ -23,10 +23,24 @@
 
 <script>
 import Table from '@/components/Home/Table'
+import { fetchAlubums, fetchPhotos } from '../../api'
 
 export default {
   name: 'Home',
-  components: {Table}
+  components: {Table},
+  data () {
+    return {}
+  },
+  mounted: async function () {
+    try {
+      const [alubums, photos] = await Promise.all([fetchAlubums(), fetchPhotos()])
+      console.log('ALUBUMS', alubums)
+      console.log('PHOTOS', photos)
+      this.$store.dispatch('setPhotosAndAlubums', {photos, alubums})
+    } catch (e) {
+      console.log('Ooops an error coured', e)
+    }
+  }
 }
 </script>
 

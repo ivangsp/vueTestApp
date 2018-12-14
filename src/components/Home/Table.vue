@@ -11,24 +11,13 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>title will go here</td>
-        <td>photo title will go Here</td>
+      <tr v-for="photo in photosPerPage" :key="photosPerPage.indexOf(photo)">
+        <td>{{photo.alubumId}}</td>
+        <td>{{photo.alubumTitle}}</td>
+        <td>{{photo.title}}</td>
         <td>
           <div><img
-            src="https://via.placeholder.com/150/24f355"
-            alt=""></div>
-        </td>
-      </tr>
-
-      <tr>
-        <td>1</td>
-        <td>title will go here</td>
-        <td>photo title will go Here</td>
-        <td>
-          <div><img
-            src="https://via.placeholder.com/150/24f355"
+            v-bind:src="photo.thumbnailUrl"
             alt=""></div>
         </td>
       </tr>
@@ -37,10 +26,15 @@
   </table>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Table',
   data () {
     return {}
+  },
+  computed: {
+    ...mapGetters(['photosPerPage'])
   }
 }
 </script>

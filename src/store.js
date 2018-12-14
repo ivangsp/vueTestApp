@@ -6,32 +6,44 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 
   state: {
-    alubums: null,
-    photos: null
+    photoAndAlubums: null,
+    currentPage: 0,
+    totalNumberOfPages: 0,
+    photosPerPage: []
   },
 
   mutations: {
-    SET_ALUBUMS (state, alubums) {
-      state.alubums = alubums
+    SET_PHOTOSANDALUBUMS (state, photoAlubum) {
+      state.photoAndAlubums = photoAlubum
+      state.photosPerPage = photoAlubum.slice(0, 20)
     },
-    SET_PHHOTOS (state, photos) {
-      state.photos = photos
+
+    SET_CURRENT_PAGE (state, page) {
+      state.currentPage = page
+      state.photosPerPage = state.photoAndAlubums.slice(20 * (state.currentPage - 1), 20 * state.currentPage)
     }
+
   },
 
   actions: {
-    setAlubums ({commit}, alubums) {
-      commit('SET_ALUBUMS', alubums)
+    setPhotosAndAlubums ({commit}, {photos, alubums}) {
+      const photoAndAlubums = photos.map(photo => {
+        const alubum = alubums.find(alubum => alubum.id === photo.albumId)
+        return {...photo, alubumTitle: alubum.title}
+      })
+      commit('SET_PHOTOSANDALUBUMS', photoAndAlubums)
     },
-    setPhotos ({commit}, photos) {
-      commit('SET_PHOTOS', photos)
+    setCurrentPage ({commit}, pageNumber) {
+      commit('SET_CURRENT_PAGE', pageNumber)
     }
 
   },
 
   getters: {
     photos: state => state.photos,
-    alubums: state => state.alubums
+    alubums: state => state.alubums,
+    photosPerPage: state => state.photosPerPage,
+    currentPage: state => state.currentPage
   }
 
 })
