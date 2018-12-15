@@ -3,20 +3,19 @@
     <div class="nav-container">
       <h2>Table showing Alubums and Photos</h2>
     </div>
-    <div class="content-container">
-      <div class="side-bar">
-        <p>Search By </p>
-        <div>
-          <select>
-          <option value="0"> All </option>
+    <div class="search-container">
+      <div>
+        <input type="text" placeholder="Search.......">
+        <select>
+          <option placeholder="" value="0">ALL</option>
           <option value="1"> Alubum Title </option>
           <option value="2"> Photo title </option>
         </select>
-        </div>
       </div>
-      <div class="table-container">
+    </div>
+
+    <div class="table-container">
       <Table/>
-      </div>
     </div>
   </div>
 </template>
@@ -49,27 +48,51 @@ export default {
   display: flex;
   width: 100%;
   flex-direction: column;
+  justify-content: center;
+
   /* margin: 10px 30px 0px 30px; */
 }
 .content-container {
   display: flex;
   flex-direction: row;
 }
-.side-bar {
+.search-container {
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-
+  align-self: center;
+  padding: 5px;
 }
 .table-container {
-  flex-grow: 3
+  justify-content: center;
+  align-self: center;
 }
-
+input[type=text] {
+  height: 35px;
+  padding-left: 10px;
+  text-decoration: none;
+  background: #979797;
+  border-radius: 5px;
+  border: 2px;
+  color: white;
+  font-weight: bold;
+  font-size: 15pt;
+  width: 30vw;
+}
 select {
-  padding: 5px;
-  margin-left: 12px;
-  margin-top: 6px;
+  height: 35px;
+  max-width: 150px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 10pt;
+  background: #979797;
+
+}
+::placeholder {
+  color: white;
+  font-weight: bold;
+  size: 10pt;
 }
 
 </style>

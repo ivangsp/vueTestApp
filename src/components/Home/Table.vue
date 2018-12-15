@@ -31,7 +31,6 @@
             v-on:click="setCurrentPage(i)" v-bind:class="currentPage === i ? 'current-page' : ''">{{i}}</span>
             <div>.......</div>
             <button v-if="currentPage <= totalNumberOfPages" class="button" v-on:click="goToNextPage()">Next</button>
-
           </div>
         </td>
         </tr>
