@@ -7,7 +7,7 @@ const store = new Vuex.Store({
 
   state: {
     photoAndAlubums: null,
-    currentPage: 0,
+    currentPage: 1,
     totalNumberOfPages: 0,
     photosPerPage: []
   },
@@ -15,12 +15,14 @@ const store = new Vuex.Store({
   mutations: {
     SET_PHOTOSANDALUBUMS (state, photoAlubum) {
       state.photoAndAlubums = photoAlubum
-      state.photosPerPage = photoAlubum.slice(0, 20)
+      state.photosPerPage = photoAlubum.slice(0, 25)
+      const totalNumberOfPages = Math.round(photoAlubum.length / 25)
+      state.totalNumberOfPages = totalNumberOfPages
     },
 
     SET_CURRENT_PAGE (state, page) {
       state.currentPage = page
-      state.photosPerPage = state.photoAndAlubums.slice(20 * (state.currentPage - 1), 20 * state.currentPage)
+      state.photosPerPage = state.photoAndAlubums.slice(25 * (state.currentPage - 1), 25 * state.currentPage)
     }
 
   },
@@ -43,7 +45,9 @@ const store = new Vuex.Store({
     photos: state => state.photos,
     alubums: state => state.alubums,
     photosPerPage: state => state.photosPerPage,
-    currentPage: state => state.currentPage
+    currentPage: state => state.currentPage,
+    totalNumberOfPages: state => state.totalNumberOfPages,
+    photoAndAlubums: state => state.photoAndAlubums
   }
 
 })

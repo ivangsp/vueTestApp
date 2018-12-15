@@ -22,19 +22,53 @@
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <div class="pagination">
+            <button v-if="currentPage > 1" class="button" v-on:click="goToPreviousPage()" > prev</button>
+            <span v-for="i in Array(this.totalNumberOfPages).fill(0).map((e, i) => i + 1).slice(startPage, endPage)" :key="i"
+            v-on:click="setCurrentPage(i)" v-bind:class="currentPage === i ? 'current-page' : ''">{{i}}</span>
+            <div>.......</div>
+            <button v-if="currentPage <= totalNumberOfPages" class="button" v-on:click="goToNextPage()">Next</button>
 
+          </div>
+        </td>
+        </tr>
+    </tfoot>
   </table>
 </template>
 <script>
+
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Table',
   data () {
-    return {}
+    return {
+      startPage: 0,
+      endPage: 25
+    }
   },
   computed: {
-    ...mapGetters(['photosPerPage'])
+    ...mapGetters(['photosPerPage', 'currentPage', 'totalNumberOfPages'])
+  },
+  methods: {
+    setCurrentPage: function (page) {
+      this.$store.dispatch('setCurrentPage', page)
+    },
+
+    goToNextPage: function () {
+      this.startPage += 1
+      this.endPage += 1
+      this.$store.dispatch('setCurrentPage', this.currentPage + 1)
+    },
+
+    goToPreviousPage: function () {
+      this.startPage -= 1
+      this.endPage -= 1
+      this.$store.dispatch('setCurrentPage', this.currentPage - 1)
+    }
   }
 }
 </script>
@@ -75,5 +109,25 @@ tbody tr:nth-child(even) {
 thead {
   background-color: #3D3D3D;
   color: white;
+}
+.button {
+  padding: 5px;
+  width: 100px;
+  cursor: pointer;
+}
+span {
+  width: 40px;
+  height: 30px;
+  padding: 2px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+.pagination {
+  display: flex;
+  flex-direction: row
+}
+.current-page {
+  background: gray;
+  font-weight: 200px;
 }
 </style>
