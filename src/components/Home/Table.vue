@@ -12,7 +12,7 @@
 
     <tbody>
       <tr v-for="photo in photosPerPage" :key="photosPerPage.indexOf(photo)">
-        <td>{{photo.alubumId}}</td>
+        <td>{{photo.albumId}}</td>
         <td>{{photo.alubumTitle}}</td>
         <td>{{photo.title}}</td>
         <td>
@@ -74,30 +74,57 @@ export default {
 </script>
 
 <style scoped>
+
 table {
+  width: 80vw;
   table-layout: fixed;
-  width: 100%;
   border-collapse: collapse;
-  border: 3px solid purple;
-  padding-left: 10px;
-  /* margin: 10px; */
+  display: table;
+  display: block;
+}
+thead {
+  background-color: #3D3D3D;
+  color: white;
+  width: 80vw;
+  display: block;
+}
+tbody {
+  display: block;
+  overflow: auto;
+  width: 80vw;
+  height: 70vh;
+  overflow: auto;
 }
 thead th:nth-child(1) {
   width: 8%;
 }
-thead th:nth-child(2) {
+thead th:nth-child(2){
   width: 30%;
 }
 thead th:nth-child(3) {
   width: 30%;
 }
 
-thead th:nth-child(4) {
+thead th:nth-child(4){
   width: 30%;
 }
-
-th, td {
+tbody tr {
+  width: 80vw;
+}
+th {
   padding: 20px;
+}
+td:nth-child(1) {
+  width: 5%;
+}
+td:nth-child(2) {
+  width: 30%;
+}
+td:nth-child(3) {
+  width: 30%;
+}
+td:nth-child(4) {
+  width: 30%;
 }
 tbody tr:nth-child(odd) {
   background-color: #F2F2F2;
@@ -105,10 +132,6 @@ tbody tr:nth-child(odd) {
 
 tbody tr:nth-child(even) {
   background-color: #FFFFFF;
-}
-thead {
-  background-color: #3D3D3D;
-  color: white;
 }
 .button {
   padding: 5px;

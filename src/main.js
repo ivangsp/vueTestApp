@@ -5,12 +5,10 @@ import App from './App'
 import router from './router'
 import VueRouter from 'vue-router'
 import store from './store'
-import Paginate from 'vuejs-paginate'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-Vue.component('paginate', Paginate)
 
 /* eslint-disable no-new */
 new Vue({
