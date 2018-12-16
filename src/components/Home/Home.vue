@@ -5,12 +5,17 @@
     </div>
     <div class="search-container">
       <div>
-        <input type="text" placeholder="Search.......">
-        <select>
-          <option placeholder="" value="0">ALL</option>
-          <option value="1"> Alubum Title </option>
-          <option value="2"> Photo title </option>
+        <span>Search By:</span>
+        <select v-model="filterBy">
+          <option placeholder="ALL" value="0">ALL</option>
+          <option value="ALUBUM_TITLE"> Alubum Title </option>
+          <option value="PHOTO_TITLE"> Photo title </option>
         </select>
+        <input type="text" v-model="searchTerm"
+          v-on:keyup="filterPhotos"
+          v-on:keydown="clearTimer"
+          v-on:keyup.enter="enterClicked"
+          placeholder="Enter alubum title or photo title.......">
       </div>
     </div>
 
@@ -28,16 +33,33 @@ export default {
   name: 'Home',
   components: {Table},
   data () {
-    return {}
+    return {
+      timer: 0,
+      searchTerm: '',
+      filterBy: 0
+    }
   },
   mounted: async function () {
     try {
       const [alubums, photos] = await Promise.all([fetchAlubums(), fetchPhotos()])
-      console.log('ALUBUMS', alubums)
-      console.log('PHOTOS', photos)
       this.$store.dispatch('setPhotosAndAlubums', {photos, alubums})
     } catch (e) {
       console.log('Ooops an error coured', e)
+    }
+  },
+
+  methods: {
+    filterPhotos: function () {
+      this.timer = setTimeout(() => {
+        console.log('pppk')
+        this.$store.dispatch('filterPhotos', {searchTerm: this.searchTerm, filterBy: this.filterBy})
+      }, 500)
+    },
+    clearTimer: function () {
+      clearInterval(this.timer)
+    },
+    enterClicked: function () {
+      this.$store.dispatch('filterPhotos', {searchTerm: this.searchTerm, filterBy: this.filterBy})
     }
   }
 }
@@ -91,8 +113,8 @@ select {
 }
 ::placeholder {
   color: white;
-  font-weight: bold;
   size: 10pt;
+  opacity: 0.65;
 }
 
 </style>

@@ -26,11 +26,10 @@
       <tr>
         <td colspan="3">
           <div class="pagination">
-            <button v-if="currentPage > 1" class="button" v-on:click="goToPreviousPage()" > prev</button>
-            <span v-for="i in Array(this.totalNumberOfPages).fill(0).map((e, i) => i + 1).slice(startPage, endPage)" :key="i"
+            <button v-if="currentPage > 1 && totalNumberOfPages > 25" class="button" v-on:click="goToPreviousPage()" > prev</button>
+            <span v-for="i in Array(totalNumberOfPages).fill(0).map((e, i) => i + 1).slice(startPage, endPage)" :key="i"
             v-on:click="setCurrentPage(i)" v-bind:class="currentPage === i ? 'current-page' : ''">{{i}}</span>
-            <div>.......</div>
-            <button v-if="currentPage <= totalNumberOfPages" class="button" v-on:click="goToNextPage()">Next</button>
+            <button v-if="currentPage < totalNumberOfPages && totalNumberOfPages > 25" class="button" v-on:click="goToNextPage()">Next</button>
           </div>
         </td>
         </tr>
@@ -64,8 +63,10 @@ export default {
     },
 
     goToPreviousPage: function () {
-      this.startPage -= 1
-      this.endPage -= 1
+      if (this.startPage > 0) {
+        this.startPage -= 1
+        this.endPage -= 1
+      }
       this.$store.dispatch('setCurrentPage', this.currentPage - 1)
     }
   }
