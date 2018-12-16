@@ -2,26 +2,22 @@
 
 > application to display data in a table
 
-## Build Setup
+## How to set up
 
-``` bash
-# install dependencies
-npm install
+### development
 
-# serve with hot reload at localhost:8080
-npm run dev
+- clone the repository ie `git clone https://github.com/ivangsp/vueTestApp`
 
-# build for production with minification
-npm run build
+- cd into the repository and install the dependecies ie `cd vueTestApp && npm install`
 
-# build for production and view the bundle analyzer report
-npm run build --report
+- start the application by running `npm run dev`
 
-# run unit tests
-npm run unit
+- The application runs on port 8080, Navigate to `http://localhost:8080` to view the application
 
-# run all tests
-npm test
-```
+### production
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- run `npm run build`
+
+**NOTE**
+
+*This project is intended for study purposes.*
